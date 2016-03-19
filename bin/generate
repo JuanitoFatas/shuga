@@ -4,7 +4,7 @@
 # Exit cleanly from an early interrupt
 Signal.trap("INT") { abort }
 
-# Description
+# Generate json from files.
 #
 # Usage:
 #
