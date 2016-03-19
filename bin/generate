@@ -1,0 +1,23 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+# Exit cleanly from an early interrupt
+Signal.trap("INT") { abort }
+
+# Description
+#
+# Usage:
+#
+# $ generate
+#
+
+require "json"
+
+unit, *data = IO.readlines("shuga").map(&:rstrip!)
+
+IO.write(
+  "shuga.json",
+  JSON.pretty_generate({ "單位" => unit }.merge!(data.map { |item| item.split(" ") }.to_h))
+)
+
+puts "Generated shuga.json."
