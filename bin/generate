@@ -13,11 +13,15 @@ Signal.trap("INT") { abort }
 
 require "json"
 
-unit, *data = IO.readlines("shuga").map(&:rstrip!)
+files = ["shuga", "glycemic_index"]
 
-IO.write(
-  "shuga.json",
-  JSON.pretty_generate({ "單位" => unit }.merge!(data.map { |item| item.split(" ") }.to_h))
-)
+files.each do |file|
+  unit, *data = IO.readlines(file).map(&:rstrip!)
 
-puts "Generated shuga.json."
+  IO.write(
+    "#{file}.json",
+    JSON.pretty_generate({ "單位" => unit }.merge!(data.map { |item| item.split(" ") }.to_h))
+  )
+
+  puts "Generated #{file}.json."
+end
